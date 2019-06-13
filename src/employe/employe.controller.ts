@@ -3,9 +3,12 @@ import { GrpcMethod } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { EmployeById } from './interfaces/employe-by-id.interface';
 import { Employe } from './interfaces/employe.interface';
+import { EmployeService } from './employe.service';
+import { CreateEmployeDto } from './dto/create-employe.dto';
 
 @Controller()
 export class EmployeController {
+  constructor(private readonly employeService: EmployeService) {}
   employes: any = {
     allEmployes: [
       {
@@ -51,9 +54,15 @@ export class EmployeController {
   findOne(data: EmployeById): Employe {
     return this.employes.allEmployes.find(({ id }) => id === data.id);
   }
+
   @GrpcMethod('EmployeService')
-  findAll(): any {
-    const allEmployes = this.employes;
-    return allEmployes;
+  async findAll(): Promise<any> {
+    const allEmployes = await this.employeService.findAll();
+    return { allEmployes };
+  }
+
+  @GrpcMethod('EmployeService')
+  async create(createEmployeDto: CreateEmployeDto) {
+    return await this.employeService.create(createEmployeDto);
   }
 }

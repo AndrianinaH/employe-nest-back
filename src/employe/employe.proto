@@ -5,6 +5,7 @@ package employe;
 service EmployeService {
   rpc FindOne (EmployeById) returns (Employe) {}
   rpc FindAll (Empty) returns (EmployeList) {}
+  rpc Create (EmployeCreate) returns (Employe) {}
 }
 
 message EmployeById {
@@ -19,6 +20,15 @@ message Employe {
   string sexe = 5;
   string dateNaissance = 6;
   string urlPhoto = 7;
+}
+
+message EmployeCreate {
+  string nom = 1;
+  string prenom = 2;
+  string poste = 3;
+  string sexe = 4;
+  string dateNaissance = 5;
+  string urlPhoto = 6;
 }
 
 message EmployeList {
