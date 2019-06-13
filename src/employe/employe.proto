@@ -8,16 +8,21 @@ service EmployeService {
 }
 
 message EmployeById {
-  int32 id = 1;
+  string id = 1;
 }
 
 message Employe {
-  int32 id = 1;
-  string name = 2;
+  string id = 1;
+  string nom = 2;
+  string prenom = 3;
+  string poste = 4;
+  string sexe = 5;
+  string dateNaissance = 6;
+  string urlPhoto = 7;
 }
 
 message EmployeList {
-    repeated Employe employes = 1;
+    repeated Employe allEmployes = 1;
 }
 
 message Empty{}

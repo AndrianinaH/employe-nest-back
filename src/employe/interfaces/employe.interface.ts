@@ -1,4 +1,9 @@
 export interface Employe {
-  id: number;
-  name: string;
+  id: string;
+  nom: string;
+  prenom: string;
+  poste: string;
+  sexe: string;
+  dateNaissance: Date;
+  urlPhoto: string;
 }

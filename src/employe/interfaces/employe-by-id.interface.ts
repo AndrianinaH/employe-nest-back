@@ -1,3 +1,3 @@
 export interface EmployeById {
-  id: number;
+  id: string;
 }
