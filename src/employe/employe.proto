@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package employe;
+
+service EmployeService {
+  rpc FindOne (EmployeById) returns (Employe) {}
+  rpc FindAll (Empty) returns (EmployeList) {}
+}
+
+message EmployeById {
+  int32 id = 1;
+}
+
+message Employe {
+  int32 id = 1;
+  string name = 2;
+}
+
+message EmployeList {
+    repeated Employe employes = 1;
+}
+
+message Empty{}
