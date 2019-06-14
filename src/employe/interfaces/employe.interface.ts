@@ -1,4 +1,6 @@
-export interface Employe {
+import { Document } from 'mongoose';
+
+export interface Employe extends Document {
   id: string;
   nom: string;
   prenom: string;

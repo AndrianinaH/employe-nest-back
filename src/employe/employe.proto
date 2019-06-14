@@ -6,10 +6,16 @@ service EmployeService {
   rpc FindOne (EmployeById) returns (Employe) {}
   rpc FindAll (Empty) returns (EmployeList) {}
   rpc Create (EmployeCreate) returns (Employe) {}
+  rpc Update (Employe) returns (Employe) {}
+  rpc Delete (EmployeById) returns (DeleteRet) {}
 }
 
 message EmployeById {
   string id = 1;
+}
+
+message DeleteRet {
+  int32 deletedCount = 1; 
 }
 
 message Employe {

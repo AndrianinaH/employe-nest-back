@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Employe } from './interfaces/employe.interface';
 import { CreateEmployeDto } from './dto/create-employe.dto';
+import { UpdateEmployeDto } from './dto/update-employe.dto';
 
 @Injectable()
 export class EmployeService {
@@ -11,11 +12,27 @@ export class EmployeService {
   ) {}
 
   async create(createEmployeDto: CreateEmployeDto): Promise<Employe> {
-    const createdCat = new this.employeModel(createEmployeDto);
-    return await createdCat.save();
+    const add = new this.employeModel(createEmployeDto);
+    return add.save();
+  }
+
+  async update(updateEmplyeDto: UpdateEmployeDto): Promise<Employe> {
+    await this.employeModel.findByIdAndUpdate(
+      updateEmplyeDto.id,
+      updateEmplyeDto
+    );
+    return this.employeModel.findById(updateEmplyeDto.id);
+  }
+
+  async delete({ id }) {
+    return this.employeModel.deleteOne({ _id: id });
   }
 
   async findAll(): Promise<Employe[]> {
-    return await this.employeModel.find().exec();
+    return this.employeModel.find();
+  }
+
+  async findById({ id }): Promise<Employe> {
+    return this.employeModel.findById(id);
   }
 }
